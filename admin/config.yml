@@ -5,15 +5,29 @@ backend:
 media_folder: media
 public_folder: /media
 collections:
-  - name: pages # Used in routes, e.g., /admin/collections/blog
-    label: Pages # Used in the UI
-    folder: pages # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    fields: # The fields for each document, usually in front matter
-      - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Meta Tags", name: "meta-keywords", widget: "string"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Sidebar", name: "sidebar", widget: "markdown"}
+  - name: pages-landing
+    label: Landing Pages
+    folder: pages/landing
+    create: true
+    slug: {{slug}}
+    fields:
+      - {label: "Layout", name: layout, widget: hidden, default: home}
+      - {label: "Title", name: title, widget: string, default: Home}
+      - {label: "Show Featured Content", name: feature, widget: boolean}
+      - {label: "Featured Title", name: featured-title, widget: string}
+      - {label: "Featured Image", name: featured-image, widget: image}
+      - {label: "Featured Body", name: featured-body, widget: markdown}
+      - {label: "Main Content", name: body, widget: markdown}
+      - {label: "Show Sidebar", name: sidebar, widget: boolean}
+  - name: pages-content
+    label: Content Pages
+    folder: pages/content
+    create: true
+    slug: {{slug}}
+    fields:
+      - {label: "Layout", name: layout, widget: text, default: page}
+      - {label: "Title", name: title, widget: string}
+      - {label: "Meta Tags", name: meta-keywords, widget: list}
+      - {label: "Main Content", name: body, widget: markdown}
+      - {label: "Show Sidebar", name: sidebar, widget: boolean}
+      - {label: "Sidebar Content", name: sidebar-content, widget: markdown}
